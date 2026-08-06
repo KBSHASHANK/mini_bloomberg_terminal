@@ -1,10 +1,16 @@
 import pandas as pd
-from datetime import datetime
 from services.database import get_connection
 
 
-def add_stock(ticker: str, shares: float, buy_price: float):
-    """Add a stock to the portfolio."""
+def add_stock(
+    ticker: str,
+    shares: float,
+    buy_price: float,
+    purchase_date: str
+):
+    """
+    Add a stock to the portfolio.
+    """
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -17,7 +23,7 @@ def add_stock(ticker: str, shares: float, buy_price: float):
         ticker.upper(),
         shares,
         buy_price,
-        datetime.now().strftime("%Y-%m-%d")
+        purchase_date
     ))
 
     conn.commit()
@@ -25,7 +31,9 @@ def add_stock(ticker: str, shares: float, buy_price: float):
 
 
 def load_portfolio() -> pd.DataFrame:
-    """Load the portfolio."""
+    """
+    Load the entire portfolio.
+    """
 
     conn = get_connection()
 
@@ -41,7 +49,9 @@ def load_portfolio() -> pd.DataFrame:
 
 
 def delete_stock(stock_id: int):
-    """Delete a stock from the portfolio."""
+    """
+    Delete a stock from the portfolio.
+    """
 
     conn = get_connection()
     cursor = conn.cursor()

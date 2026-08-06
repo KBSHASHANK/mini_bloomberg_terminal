@@ -1,8 +1,16 @@
-# Python bytecode and cache files
-__pycache__/
-*.pyc
-*.pyo
+# Virtual environment
+.venv/
 
-# Local SQLite databases
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite databases
 *.db
-data/
+
+# IDE settings
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
