@@ -16,8 +16,8 @@ def init_db():
     """Initialize the SQLite database with required tables."""
     conn = get_connection()
     cursor = conn.cursor()
-    
-    # Table for historical OHLCV data
+
+    # Historical market prices
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS historical_prices (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +31,18 @@ def init_db():
             UNIQUE(ticker, date)
         )
     """)
-    
+
+    # User portfolio
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS portfolio (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker TEXT NOT NULL,
+            shares REAL NOT NULL,
+            buy_price REAL NOT NULL,
+            purchase_date TEXT NOT NULL
+        )
+    """)
+
     conn.commit()
     conn.close()
 
